@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshit Sharma - Developer Portfolio | Buy Services</title>
+    <link rel="stylesheet" href="STYLE.CSS">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">Harshit&#39;s Portfolio</div>
+            <ul id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Hi, I&#39;m <span>Harshit Sharma</span></h1>
+                <p>Full-Stack Web Developer creating amazing digital experiences. Ready to build your next project!</p>
+                <button class="cta-btn" onclick="scrollToSection(&#39;#services&#39;)">Buy My Services</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/developer-illustration-svg-download-png-3913105.png"
+                    alt="Harshit Sharma - Developer">
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>I&#39;m a passionate web developer specializing in modern, responsive websites. With expertise in
+                    HTML, CSS, JavaScript, and more, I help businesses grow online. Now offering premium services with
+                    easy purchase and GST-compliant invoicing.</p>
+            </div>
+        </section>
+
+        <!-- Services/Products Section -->
+        <section id="services" class="section">
+            <h2>Services for Sale</h2>
+            <p style="text-align: center; margin-bottom: 3rem; opacity: 0.9;">Choose a package and buy now. GST (18%)
+                included in total.</p>
+            <div class="services-grid">
+                <div class="service-card" data-product='{"name":"Basic Website","price":5000}'>
+                    <h3>Basic Website</h3>
+                    <p>Static portfolio or landing page</p>
+                    <div class="price">₹5,000</div>
+                    <button class="buy-btn" onclick="addToCart(this)">Buy Now</button>
+                </div>
+                <div class="service-card" data-product='{"name":"Advanced Web App","price":15000}'>
+                    <h3>Advanced Web App</h3>
+                    <p>Full-stack app with database &amp; auth</p>
+                    <div class="price">₹15,000</div>
+                    <button class="buy-btn" onclick="addToCart(this)">Buy Now</button>
+                </div>
+                <div class="service-card" data-product='{"name":"Custom Portfolio","price":8000}'>
+                    <h3>Custom Portfolio</h3>
+                    <p>Professional developer portfolio like this one</p>
+                    <div class="price">₹8,000</div>
+                    <button class="buy-btn" onclick="addToCart(this)">Buy Now</button>
+                </div>
+                <div class="service-card" data-product='{"name":"E-Commerce Site","price":25000}'>
+                    <h3>E-Commerce Site</h3>
+                    <p>Complete online store with payments &amp; GST</p>
+                    <div class="price">₹25,000</div>
+                    <button class="buy-btn" onclick="addToCart(this)">Buy Now</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="cta-btn" onclick="openCart()">View Cart</button>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2>My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Portfolio Site</h3>
+                    <p>Modern responsive portfolio with e-commerce</p>
+                </div>
+                <div class="project-card">
+                    <h3>E-Commerce Demo</h3>
+                    <p>GST-enabled shopping cart system</p>
+                </div>
+                <div class="project-card">
+                    <h3>Web Apps</h3>
+                    <p>Various interactive web applications</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Contact Me</h2>
+            <form class="contact-form" onsubmit="submitContact(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <div id="gstDisplay" class="gst-display" style="display: none;">
+                <div>Subtotal: <span id="subtotal">₹0</span></div>
+                <div>GST (18%): <span id="gst">₹0</span></div>
+                <div class="total">Total: <span id="total">₹0</span></div>
+            </div>
+            <div id="cartEmpty" class="cart-empty" style="display: none;">Your cart is empty. <button class="buy-btn"
+                    onclick="closeCart()">Shop Now</button></div>
+            <button id="checkoutBtn" class="checkout-btn" style="display: none;" onclick="checkout()">Proceed to
+                Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout/Invoice Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCheckout()">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkoutForm" onsubmit="generateInvoice(event)">
+                <div class="form-group">
+                    <input type="text" id="buyerName" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="buyerEmail" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="buyerPhone" placeholder="Phone">
+                </div>
+                <div id="invoiceCart"></div>
+                <div id="invoiceSummary" class="gst-display"></div>
+                <button type="submit" class="checkout-btn">Generate GST Invoice &amp; Pay</button>
+            </form>
+            <div id="invoiceResult" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="INDEX.JS"></script>
+</body>
+
+</html>
